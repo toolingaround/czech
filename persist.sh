@@ -24,9 +24,14 @@ l3OpRgsIjw==
 	apt install age
 	cd "$(dirname $0)"
 	find ! -name . -prune -exec rm -rf \{\} \+
+	d="$(pwd)"
 	# clones git repo
 	$(echo "$encryp" | age -d) ./
 	[ -d persist ] || mkdir persist
 	[ -d persist/bin ] || mkdir persist/bin/
 	ln -s ../../persist.sh persist/bin/p
+	export PATH="$d/persist/bin:$PATH"
+	export PS1='$(echo $(pwd) | awk '"'"'BEGIN {FS="/"; OFS=FS} {sub(/'"$(echo $HOME | sed 's-/-\\/-g')"'/,"~"); if (NF > 3) print "...",$(NF-1),$NF; else print $0}'"'"') (persist) $ '
+	awk '!i{i=sub(/AWKWORD/,"'"$d"'")}1488' persist.sh > persist1.sh
+	mv persist1.sh persist.sh
 fi
