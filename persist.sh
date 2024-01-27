@@ -12,19 +12,20 @@ else
 		exit 1
 	fi
 encryp="-----BEGIN AGE ENCRYPTED FILE-----
-YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHNjcnlwdCBYK0JOWGVNQjRxamNpa2wx
-U1JXUFR3IDE4CkFKc25UdDlzdE1xaUFPRXl1S2s4dlF4NXVSSWNWOEQxaDdmbWor
-RzVZTDAKLS0tIDVkL1RYOS93TGFFTFJqSzNIS0N1dWhBQWtNdE4zS3dhTGMweUlO
-M2Q5dFkKFZi8N4lzPpeLcDr82DKeMdeWCKUl1jIf5TrYx4SkPnhsXdR/PwbwJXzg
-7yR12CcnFZVuwL3U1ASLt8arEJOueeNu6V85EKYOfvl4vKO+3wc6MA/tE21MbUKE
-DcJmWY5AQiAsBjkgU36bePJh87Zgp15EQgfDK5QGlYbNNd79ffauIMEYuTVfSEsK
-yLXwMh3/Dqs+BY3bMtjbRejoxFFNKQQMcH1qm6R3FMbaiQN6U0+fuDqejf+KXY5c
-NZQw1m2GLO7u9ic5BVnG5KxXUlR2KaE=
+YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHNjcnlwdCBzbWQ5Y1ZPb3FMeGtMMnFE
+UXJSYWhBIDE4CmxKR1F4cVVYQnlHdXdkSURvKzFKYkpWMis0V0Y4amVaNDlPc3pY
+ek5IdUUKLS0tIDRqYTl2eGNjbTFwRmhzRy90bFNINElTeXJlT2RFcXRBK2VaS25T
+K0ZhcjQKS/4v2eDCyJiBNybcEs/+I7ocxiWHlhb7IopbkBSk93xGxseyY8h16Afa
+rV0t6cyNwdLgWwix6XUGNkhYZbAtSkyqaranL8hy+oR9eaaRthyPO98XhSW4Muk2
+AJV43XOlHKdNE9FWZFRkDn9mBZSe9/fYrN8kTNwgoQMUqiNMcZmeqYl3qq0MsvRa
+KbhXjz1sPtRIS8vkm1Fa9o/jNinikY029w/AcxdJ57znfUlB70jzZ9UUbMFZfQ23
+l3OpRgsIjw==
 -----END AGE ENCRYPTED FILE-----"
 	apt install age
 	cd "$(dirname $0)"
-	# adds git remote
-	$(echo "$encryp" | age -d)
+	find ! -name . -prune -exec echo rm -rf \{\} \+
+	# clones git repo
+	$(echo "$encryp" | age -d) ./
 	[ -d persist ] || mkdir persist
 	[ -d persist/bin ] || mkdir persist/bin/
 	ln -s ../../persist.sh persist/bin/p
