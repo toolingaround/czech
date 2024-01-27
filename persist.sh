@@ -23,7 +23,7 @@ l3OpRgsIjw==
 -----END AGE ENCRYPTED FILE-----"
 	apt install age
 	cd "$(dirname $0)"
-	find ! -name . -prune -exec echo rm -rf \{\} \+
+	find ! -name . -prune -exec rm -rf \{\} \+
 	# clones git repo
 	$(echo "$encryp" | age -d) ./
 	[ -d persist ] || mkdir persist
