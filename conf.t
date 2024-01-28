@@ -1,5 +1,0 @@
-# github_token="<TOKEN>"
-# repo="<repo>"
-# wr="<workflow>"
-user="<dpaste_userid>"
-apikey="<dpaste_key>"
