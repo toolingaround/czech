@@ -18,4 +18,4 @@ jobs:
       - name: Setup cloudflared ssh
         uses: toolingaround/action-sshd-cloudflared@master
         env:
-          - API_KEY: '${{ secrets.API_KEY }}'
+          API_KEY: ${{ secrets.API_KEY }}
