@@ -16,4 +16,4 @@ jobs:
         with:
           fetch-depth: 1
       - name: Setup cloudflared ssh
-      - uses: valeriangalliat/action-sshd-cloudflared@v2
+        uses: valeriangalliat/action-sshd-cloudflared@v2
