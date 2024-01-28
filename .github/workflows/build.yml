@@ -15,5 +15,5 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 1
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1 
+      - name: Setup cloudflared ssh
+        uses: valeriangalliat/action-sshd-cloudflared@v2
