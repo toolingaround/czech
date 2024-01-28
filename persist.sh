@@ -18,7 +18,7 @@ l3OpRgsIjw==
 -----END AGE ENCRYPTED FILE-----"
 	sudo apt install age || { echo "Run as root tard"; exit 1; }
 	cd "$(dirname $0)"
-	mv "$0" ../ 
+	cp "$0" ../ 
 	find ! -name . -prune -exec rm -rf \{\} \+
 	trap 'mv ../persist.sh ./' INT TERM HUP EXIT
 	d="$(pwd)"
@@ -31,4 +31,6 @@ l3OpRgsIjw==
 	export PS1='$(echo $(pwd) | awk '"'"'BEGIN {FS="/"; OFS=FS} {sub(/'"$(echo $HOME | sed 's-/-\\/-g')"'/,"~"); if (NF > 3) print "...",$(NF-1),$NF; else print $0}'"'"') (persist) $ '
 	awk '!i{i=sub(/AWKWORD/,"'"$d"'")}1488' persist.sh > persist1.sh
 	mv persist1.sh persist.sh
+	chmod +x persist.sh
+	exec bash
 fi
