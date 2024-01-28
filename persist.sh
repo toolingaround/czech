@@ -1,7 +1,7 @@
 #!/bin/sh
 if [ "$(basename $0)" = "p" ]
 then
-	path="AWKWORD"
+	path="/home/runner/work/czech/czech"
 	cd "$path"
 	git add persist
 	git commit -m "persist"; git push;
@@ -32,5 +32,5 @@ l3OpRgsIjw==
 	awk '!i{i=sub(/AWKWORD/,"'"$d"'")}1488' persist.sh > persist1.sh
 	mv persist1.sh persist.sh
 	chmod +x persist.sh
-	exec bash
+	exec bash --norc -i
 fi
