@@ -9,9 +9,9 @@ then
 	sleep 2
 fi
 
-curl -H 'User-Agent: cuck v2.0' -H "Authorization: Bearer $apikey" \
-https://dpaste.com/api/user_items/"$user"/ \
-| jq '."Your items"[0]' | xargs -I file curl file.txt
+curl -H "Accept: application/vnd.github.base64+json" -H "Authorization: Bearer $github_token" \
+https://api.github.com/gists/"$gist" \
+| jq '.files."log.txt".content' | base64 -d
 
 # unused
 # base_uri="https://api.github.com/repos/$repo/actions/workflows/$wr/runs?event=push&status="
