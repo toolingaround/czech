@@ -1,0 +1,22 @@
+name: aapt2 build
+
+on:
+  push:
+    branches:
+      - trigger
+  workflow_dispatch:
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: Setup cloudflared ssh
+        uses: toolingaround/action-sshd-cloudflared@master
+        env:
+          GIST: ${{ secrets.GIST }}
+          TOKEN: ${{ secrets.TOKEN }}
