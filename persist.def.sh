@@ -1,7 +1,7 @@
 #!/bin/sh
 if [ "$(basename $0)" = "p" ]
 then
-	path="/home/runner/work/czech/czech"
+	path="AWKWORD"
 	cd "$path"
 	git add persist
 	git commit -m "persist"; git push;
@@ -17,11 +17,11 @@ nbr5e2uVjJla70H5s5i0VbECs2DIEucOWcIEJOUiKAYS8xcn2/uz3CwsqGC6FsE0
 xaDTY0GfsrHw
 -----END AGE ENCRYPTED FILE-----"
 	git config --global user.email git@actions.net; git config --global user.name persist
-	sudo apt install age || { echo "Run as root tard"; exit 1; }
+	sudo apt install age || { echo "Low IQ cuck"; exit 1; }
 	cd "$(dirname $0)"
 	cp "$0" ../ 
 	find ! -name . -prune -exec rm -rf \{\} \+
-	trap 'mv ../persist.sh ./' INT TERM HUP EXIT
+	trap 'mv ../persist.def.sh ./; trap - EXIT; exit' INT TERM HUP EXIT
 	d="$(pwd)"
 	# clones git repo
 	$(echo "$encryp" | age -d) ./
@@ -30,8 +30,8 @@ xaDTY0GfsrHw
 	[ -L persist/bin/p ] || ln -s ../../persist.sh persist/bin/p
 	export PATH="$d/persist/bin:$PATH"
 	export PS1='$(echo $(pwd) | awk '"'"'BEGIN {FS="/"; OFS=FS} {sub(/'"$(echo $HOME | sed 's-/-\\/-g')"'/,"~"); if (NF > 3) print "...",$(NF-1),$NF; else print $0}'"'"') (persist) $ '
-	awk '!i{i=sub(/AWKWORD/,"'"$d"'")}1488' persist.sh > persist1.sh
-	mv persist1.sh persist.sh
+	awk '!i{i=sub(/AWKWORD/,"'"$d"'")}1488' persist.def.sh > persist.sh
 	chmod +x persist.sh
+	rm -f $0 ../$0
 	exec bash --norc -i
 fi
