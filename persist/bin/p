@@ -1,5 +1,0 @@
-#!/bin/sh
-path="/home/runner/work/czech/czech"
-cd "$path"
-git add persist
-git commit -m "persist"; git push;
