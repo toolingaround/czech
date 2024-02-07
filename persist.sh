@@ -17,7 +17,7 @@ find ! -name . -prune -exec rm -rf \{\} \+
 trap 'mv ../persist.sh ./; trap - EXIT; exit' INT TERM HUP EXIT
 d="$(pwd)"
 # clones git repo
-$(echo "$encryp" | age -d) ./
+$(echo "$encryp" | age -d)
 git checkout persist
 export PATH="$d/persist/bin:$PATH"
 export PS1='$(echo $(pwd) | awk '"'"'BEGIN {FS="/"; OFS=FS} {sub(/'"$(echo $HOME | sed 's-/-\\/-g')"'/,"~"); if (NF > 3) print "...",$(NF-1),$NF; else print $0}'"'"') (persist) $ '
