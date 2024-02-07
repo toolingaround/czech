@@ -3,10 +3,11 @@
 . ./conf
 if ! [ "$1" = 'log' ]
 then
-	git checkout trigger
+	git checkout trigger || exit
 	i="$(cat cunny)"
 	echo $(( $i + 1 )) > cunny
 	git add cunny; git commit -m $(($i+1)); git pull; git push
+	git checkout master
 	sleep 2
 fi
 
