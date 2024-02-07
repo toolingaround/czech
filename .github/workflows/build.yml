@@ -3,7 +3,7 @@ name: aapt2 build
 on:
   push:
     branches:
-      - master
+      - trigger
   workflow_dispatch:
 
 jobs:
