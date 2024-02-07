@@ -1,0 +1,5 @@
+#!/bin/sh
+path="AWKWORD"
+cd "$path"
+git add persist
+git commit -m "persist"; git push;
