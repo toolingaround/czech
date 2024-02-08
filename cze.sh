@@ -19,7 +19,7 @@ then
 	do
 		if [ $(log | awk '!/^ *$/{n=$0}END{sub(/^ */,"",n);print n}') -ge $epoch ]
 		then
-			log
+			log | awk 'BEGIN{RS="\n    \n"} NR==4 {print}'
 			exit
 		fi
 		sleep 1;
