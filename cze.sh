@@ -20,7 +20,7 @@ then
 		if [ $(log | awk '!/^ *$/{n=$0}END{sub(/^ */,"",n);print n}') -ge $epoch ]
 		then
 			log
-			break
+			exit
 		fi
 		sleep 1;
 	done
