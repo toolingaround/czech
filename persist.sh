@@ -12,7 +12,7 @@ xaDTY0GfsrHw
 git config --global user.email git@actions.net; git config --global user.name persist
 sudo apt install age || { echo "Run as root tard"; exit 1; }
 cd "$(dirname $0)"
-cp "$0" ../
+cp "./persist.sh" ../
 find ! -name . -prune -exec rm -rf \{\} \+
 trap 'mv ../persist.sh ./; trap - EXIT; exit' INT TERM HUP EXIT
 d="$(pwd)"
