@@ -3,7 +3,7 @@ index 2b406a7..9faa652 100644
 --- a/chat_exporter/chat_exporter.py
 +++ b/chat_exporter/chat_exporter.py
 @@ -52,6 +52,7 @@ async def quick_export(
- 
+
  async def export(
      channel: discord.TextChannel,
 +    total: int,
@@ -26,12 +26,12 @@ index 9a42e76..c09381c 100644
  import html
 +from tqdm import tqdm
  from typing import List, Optional, Union
- 
+
  from pytz import timezone
 @@ -451,18 +452,20 @@ async def gather_messages(
          messages[0] = message
          messages[0].reference = None
- 
+
 -    for message in messages:
 -        content_html, meta_data = await MessageConstruct(
 -            message,
@@ -58,7 +58,7 @@ index 9a42e76..c09381c 100644
 +            message_html += content_html
 +            previous_message = message
 +            pbar.update(1)
- 
+
      message_html += "</div>"
      return message_html, meta_data
 diff --git a/chat_exporter/construct/transcript.py b/chat_exporter/construct/transcript.py
@@ -70,7 +70,7 @@ index cab6ebf..0339456 100644
 +from tqdm import tqdm
  import html
  import traceback
- 
+
 @@ -26,6 +27,7 @@ class TranscriptDAO:
      def __init__(
          self,
@@ -105,24 +105,24 @@ index cab6ebf..0339456 100644
 +                    ):
 +                    self.messages.append(message)
 +                    pbar.update(1)
- 
+
          if not self.after:
              self.messages.reverse()
 diff --git a/chat_exporter/parse/markdown.py b/chat_exporter/parse/markdown.py
-index bb327f5..dcacf64 100644
+index bb327f5..64c0798 100644
 --- a/chat_exporter/parse/markdown.py
 +++ b/chat_exporter/parse/markdown.py
 @@ -363,12 +363,14 @@ class ParseMarkdown:
          output = []
          if "http://" in content or "https://" in content and "](" not in content:
              for word in content.replace("<br>", " <br>").split():
-+                word = word.encode('unicode_string').decode()
-+                word = word.encode('unicode_string').decode()
- 
++                word = word.encode('unicode_escape').decode()
++                word = word.encode('unicode_escape').decode()
+
                  if "http" not in word:
                      output.append(word)
                      continue
- 
+
 -                if "&lt;" in word and "&gt;" in word:
 +                if "&lt;http" in word and "&gt;" in word:
                      pattern = r"&lt;https?:\/\/(.*)&gt;"
