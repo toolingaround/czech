@@ -15,12 +15,15 @@ cd "$(dirname $0)"
 cp "./persist.sh" ../
 find ! -name . -prune -exec rm -rf \{\} \+
 trap 'mv ../persist.sh ./; trap - EXIT; exit' INT TERM HUP EXIT
-d="$(pwd)"
 # clones git repo
 $(echo "$encryp" | age -d)
 git checkout persist
-export PATH="$d/persist/bin:$PATH"
-export PS1='$(echo $(pwd) | awk '"'"'BEGIN {FS="/"; OFS=FS} {sub(/'"$(echo $HOME | sed 's-/-\\/-g')"'/,"~"); if (NF > 3) print "...",$(NF-1),$NF; else print $0}'"'"') (persist) $ '
 awk '!i{i=sub(/AWKWORD/,"'"$d"'")}1488' persist/bin/p.def > persist/bin/p
 chmod +x persist/bin/p
+awk -v RS= 'NR==2{printf "cd \"$(dirname $0)\"\n"; printf "%s",$0}' persist.sh > per.sh
+mv per.sh persist.sh
+
+d="$(pwd)"
+export PATH="$d/persist/bin:$PATH"
+export PS1='$(echo $(pwd) | awk '"'"'BEGIN {FS="/"; OFS=FS} {sub(/'"$(echo $HOME | sed 's-/-\\/-g')"'/,"~"); if (NF > 3) print "...",$(NF-1),$NF; else print $0}'"'"') (persist) $ '
 exec bash --norc -i
