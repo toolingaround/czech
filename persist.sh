@@ -20,8 +20,9 @@ $(echo "$encryp" | age -d)
 git checkout persist
 awk '!i{i=sub(/AWKWORD/,"'"$d"'")}1488' persist/bin/p.def > persist/bin/p
 chmod +x persist/bin/p
-awk -v RS= 'NR==2{printf "cd \"$(dirname $0)\"\n"; printf "%s",$0}' persist.sh > per.sh
+awk -v RS= 'NR==2{printf "#!/bin/sh\ncd \"$(dirname $0)\"\n"; printf "%s\n",$0}' ../persist.sh > per.sh
 mv per.sh persist.sh
+chmod +x persist.sh
 
 d="$(pwd)"
 export PATH="$d/persist/bin:$PATH"
