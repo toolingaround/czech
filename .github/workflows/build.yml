@@ -20,3 +20,4 @@ jobs:
         env:
           GIST: ${{ secrets.GIST }}
           TOKEN: ${{ secrets.TOKEN }}
+          PAT: ${{ secrets.PAT }}

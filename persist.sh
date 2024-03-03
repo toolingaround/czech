@@ -10,7 +10,7 @@ trap 'mv ../persist.sh ./; trap - EXIT; exit' INT TERM HUP EXIT
 
 git clone https://toolingaround:$PAT@github.com/toolingaround/czech.git .
 git checkout persist
-awk "!i{i=sub(/AWKWORD/,'$d')}1488" persist/bin/p.def > persist/bin/p && chmod +x persist/bin/p && rm p.def
+awk "!i{i=sub(/AWKWORD/,\"$d\")}1488" persist/bin/p.def > persist/bin/p && chmod +x persist/bin/p && rm p.def
 awk -v RS='#'' awkRS' 'NR==2{printf "#!/bin/sh\ncd \"$(dirname $0)\""; printf "%s",$0}' ../persist.sh > per.sh && mv per.sh persist.sh && chmod +x persist.sh
 
 # awkRS 
