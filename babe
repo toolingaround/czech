@@ -1,2 +1,0 @@
-#!/bin/sh
-ssh -o ProxyCommand='cloudflared access tcp --hostname https://translated-tail-typing-mechanism.trycloudflare.com' -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=accept-new runner@action-sshd-cloudflared $@
